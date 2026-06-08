@@ -20,8 +20,8 @@ export class Footer {
     {
       title: 'Per i cittadini',
       links: [
-        { label: 'Cerca offerte di lavoro', path: '/cerca-offerte-di-lavoro' },
-        { label: 'Crea il tuo CV', path: '/crea-il-tuo-cv' },
+        { label: 'Invia la tua autocandidatura', path: '/manda-il-tuo-cv' },
+        { label: 'Crea il tuo CV', path: '/manda-il-tuo-cv' },
         { label: 'Bilancio delle competenze', path: '/bilancio-delle-competenze' },
       ],
     },
