@@ -1,0 +1,53 @@
+<main class="formazione-dipendenti">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Formazione Dipendenti</h1>
+      <p class="hero__subtitle">Crescita e cambiamento al servizio della tua azienda.</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Percorsi su misura per la crescita del tuo team</h2>
+      <p class="section__lead">
+        Offriamo percorsi formativi personalizzati per sviluppare competenze strategiche,
+        combinando metodologie innovative e approcci pratici a supporto della crescita aziendale.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="offerta-heading">
+    <div class="section__inner">
+      <h2 id="offerta-heading" appFadeInOnScroll>Cosa offriamo</h2>
+      <div class="cards">
+        @for (offering of offerings; track offering.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ offering.title }}</h3>
+            <p>{{ offering.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="vantaggi-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="vantaggi-heading">Una squadra formata è una squadra più</h2>
+      <ul class="advantage-list">
+        @for (advantage of advantages; track advantage) {
+          <li>{{ advantage }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Dai valore al tuo capitale umano</h2>
+      <p>Costruisci un percorso di crescita concreto e su misura per la tua azienda.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

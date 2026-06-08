@@ -1,0 +1,88 @@
+<main class="tirocinio-extracurricolare-aziende">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Tirocinio Extracurricolare</h1>
+      <p class="hero__subtitle">Crescita e cambiamento al servizio della tua azienda.</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Un'opportunità strategica per la tua azienda</h2>
+      <p class="section__lead">
+        Offriamo percorsi formativi su misura per sviluppare competenze strategiche in linea con i
+        tuoi obiettivi aziendali, combinando metodologie innovative e approcci pratici. Il tirocinio
+        extracurriculare è un'opportunità strategica per le aziende: un percorso formativo che
+        permette di inserire risorse qualificate, pronte a crescere e ad apportare valore al team.
+        Il tirocinio è un'opportunità di formazione nell'ambito di iniziative regionali a sostegno
+        della formazione per la creazione e lo sviluppo di imprese.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="cose-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="cose-heading">Cos'è il tirocinio extracurriculare</h2>
+      <ul class="check-list">
+        @for (point of whatIsPoints; track point) {
+          <li>{{ point }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="rivolge-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="rivolge-heading">A chi si rivolge il servizio</h2>
+      <p class="section__lead">
+        È possibile accogliere tirocinanti motivati, selezionati in base alle esigenze del tuo
+        settore di attività. I tirocini possono essere:
+      </p>
+      <ul class="check-list">
+        @for (type of internshipTypes; track type) {
+          <li>{{ type }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="ospitare-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="ospitare-heading">Chi può ospitare un tirocinio</h2>
+      <p class="section__lead">
+        Tutti i datori di lavoro pubblici o privati in possesso dei requisiti previsti dalla
+        normativa.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="attiva-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="attiva-heading">Come si attiva un tirocinio</h2>
+      <p class="section__lead">
+        L'attivazione è semplice e disciplinata dai regolamenti regionali:
+      </p>
+      <ul class="check-list">
+        @for (regulation of regulations; track regulation) {
+          <li>{{ regulation }}</li>
+        }
+      </ul>
+      <p class="section__lead">Step operativi:</p>
+      <ul class="check-list">
+        @for (step of activationSteps; track step) {
+          <li>{{ step }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Inizia oggi</h2>
+      <p>Affidati a noi per attivare un tirocinio extracurriculare su misura per la tua azienda.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

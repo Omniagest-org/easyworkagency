@@ -1,0 +1,187 @@
+<main class="cv-page">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Manda il tuo CV</h1>
+      <p class="hero__subtitle">
+        Entra a far parte del nostro network. Inviaci la tua autocandidatura in pochi clic.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cv-form-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      @if (success) {
+        <p class="form-success" role="status">
+          <strong>Grazie per la tua candidatura!</strong><br />
+          I tuoi dati sono stati inviati correttamente. Il nostro team li valuterà al più presto.
+        </p>
+        <button class="btn btn--primary" (click)="success = false">
+          Invia un'altra candidatura
+        </button>
+      } @else {
+        <h2 id="cv-form-heading">Autocandidatura</h2>
+        <p class="section__lead">
+          Compila il modulo con i tuoi dati e allega il tuo CV: ti contatteremo non appena avremo
+          opportunità in linea con il tuo profilo. I campi contrassegnati con
+          <span class="required-mark">*</span> sono obbligatori.
+        </p>
+
+        @if (error) {
+          <p class="form-error" role="alert">{{ error }}</p>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contact-form" novalidate>
+          <h3 class="contact-form__section-title">Dati anagrafici</h3>
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Nome <span class="required-mark">*</span></span>
+              <input
+                type="text"
+                formControlName="nome"
+                placeholder="Mario"
+                autocomplete="given-name"
+              />
+              @if (form.get('nome')?.touched && form.get('nome')?.errors?.['required']) {
+                <small class="contact-form__hint">Inserisci il tuo nome.</small>
+              }
+            </label>
+            <label class="contact-form__field">
+              <span>Cognome <span class="required-mark">*</span></span>
+              <input
+                type="text"
+                formControlName="cognome"
+                placeholder="Rossi"
+                autocomplete="family-name"
+              />
+              @if (form.get('cognome')?.touched && form.get('cognome')?.errors?.['required']) {
+                <small class="contact-form__hint">Inserisci il tuo cognome.</small>
+              }
+            </label>
+          </div>
+
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Email <span class="required-mark">*</span></span>
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="mario.rossi@esempio.it"
+                autocomplete="email"
+              />
+              @if (form.get('email')?.touched && form.get('email')?.errors?.['required']) {
+                <small class="contact-form__hint">L'email è obbligatoria.</small>
+              }
+              @if (form.get('email')?.touched && form.get('email')?.errors?.['email']) {
+                <small class="contact-form__hint">Inserisci un indirizzo email valido.</small>
+              }
+            </label>
+            <label class="contact-form__field">
+              <span>Telefono</span>
+              <input
+                type="tel"
+                formControlName="telefono"
+                placeholder="+39 123 4567890"
+                autocomplete="tel"
+              />
+            </label>
+          </div>
+
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Data di nascita</span>
+              <input type="date" formControlName="data_nascita" />
+            </label>
+            <label class="contact-form__field">
+              <span>Luogo di nascita</span>
+              <input type="text" formControlName="luogo_nascita" placeholder="Milano" />
+            </label>
+          </div>
+
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Sesso</span>
+              <select formControlName="sesso">
+                <option value="">Seleziona...</option>
+                <option value="M">Maschio</option>
+                <option value="F">Femmina</option>
+                <option value="Altro">Altro</option>
+              </select>
+            </label>
+            <label class="contact-form__field">
+              <span>Codice fiscale</span>
+              <input type="text" formControlName="codice_fiscale" placeholder="RSSMRA90A01H501Z" />
+            </label>
+          </div>
+
+          <label class="contact-form__field">
+            <span>Domicilio</span>
+            <input type="text" formControlName="domicilio" placeholder="Via Roma 1, 00100 Roma" />
+          </label>
+
+          <h3 class="contact-form__section-title">Profilo professionale</h3>
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Titolo di studio</span>
+              <input type="text" formControlName="titolo_studio" placeholder="Laurea in Economia" />
+            </label>
+            <label class="contact-form__field">
+              <span>Profilo professionale</span>
+              <input
+                type="text"
+                formControlName="profilo_professionale"
+                placeholder="Account Manager"
+              />
+            </label>
+          </div>
+
+          <label class="contact-form__field">
+            <span>Esperienze lavorative precedenti</span>
+            <textarea
+              formControlName="esperienze_lavorative"
+              rows="4"
+              placeholder="Descrivi brevemente le tue esperienze principali..."
+            ></textarea>
+          </label>
+
+          <label class="contact-form__field">
+            <span>Note aggiuntive</span>
+            <textarea
+              formControlName="note"
+              rows="3"
+              placeholder="Altre informazioni utili..."
+            ></textarea>
+          </label>
+
+          <h3 class="contact-form__section-title">Allegati</h3>
+          <label class="contact-form__field contact-form__field--file">
+            <span>Carica il tuo CV (PDF, DOCX, immagini)</span>
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              accept=".pdf,.doc,.docx,.jpg,.png"
+            />
+            <small class="contact-form__hint">Dimensione massima consigliata: 5MB</small>
+          </label>
+
+          <label class="contact-form__checkbox">
+            <input type="checkbox" formControlName="privacy" />
+            <span
+              >Accetto il trattamento dei dati personali secondo la
+              <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>
+              <span class="required-mark">*</span></span
+            >
+          </label>
+          @if (form.get('privacy')?.touched && form.get('privacy')?.errors?.['required']) {
+            <small class="contact-form__hint"
+              >È necessario accettare la privacy policy per continuare.</small
+            >
+          }
+
+          <button type="submit" class="btn btn--primary" [disabled]="loading">
+            {{ loading ? 'Invio in corso…' : 'Invia candidatura' }}
+          </button>
+        </form>
+      }
+    </div>
+  </section>
+</main>

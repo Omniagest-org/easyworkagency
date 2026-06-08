@@ -1,0 +1,132 @@
+<main class="home">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">
+        Trova l'opportunità giusta per la tua
+        <span class="hero__highlight">crescita professionale</span>
+      </h1>
+      <p class="hero__subtitle">
+        Trova lavoro, opportunità di impiego e di carriera con il supporto di Easy Work, l'agenzia
+        per il lavoro al tuo fianco.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/cerca-offerte-di-lavoro" class="btn btn--primary"
+          >Cerca offerte di lavoro</a
+        >
+        <a routerLink="/manda-il-tuo-cv" class="btn btn--ghost-light">Carica il tuo CV</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner">
+      <h2 id="intro-heading" appFadeInOnScroll>
+        Ti aiutiamo a costruire il tuo futuro professionale
+      </h2>
+      <p class="section__lead" appFadeInOnScroll>
+        Forniamo servizi completi sia alle aziende che ai candidati per favorire la crescita e le
+        relazioni significative.
+      </p>
+      <div class="pillars">
+        @for (pillar of pillars; track pillar.title) {
+          <article class="pillar-card" appFadeInOnScroll>
+            <h3>{{ pillar.title }}</h3>
+            <p>{{ pillar.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="per-le-aziende" class="section section--alt" aria-labelledby="aziende-heading">
+    <div class="section__inner section__inner--split">
+      <div appFadeInOnScroll>
+        <h2 id="aziende-heading">Per le Aziende</h2>
+        <p class="section__lead">
+          Forniamo servizi completi di reclutamento e sviluppo per aiutare la tua attività a
+          crescere.
+        </p>
+        <ul class="check-list">
+          @for (item of aziendeServices; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+        <a routerLink="/ricerca-e-selezione-del-personale" class="btn btn--primary"
+          >Servizi per le aziende</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section id="per-i-cittadini" class="section" aria-labelledby="cittadini-heading">
+    <div class="section__inner section__inner--split section__inner--reverse">
+      <div appFadeInOnScroll>
+        <h2 id="cittadini-heading">Per i Cittadini</h2>
+        <p class="section__lead">
+          Ti mettiamo in contatto con opportunità e ti forniamo risorse per far progredire la tua
+          carriera.
+        </p>
+        <ul class="check-list">
+          @for (item of cittadiniServices; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+        <a routerLink="/cerca-offerte-di-lavoro" class="btn btn--primary"
+          >Servizi per i cittadini</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section id="politiche-attive" class="section section--alt" aria-labelledby="politiche-heading">
+    <div class="section__inner">
+      <h2 id="politiche-heading" appFadeInOnScroll>Politiche Attive</h2>
+      <p class="section__lead" appFadeInOnScroll>
+        Accedi a programmi e opportunità con contributi pubblici per favorire l'inserimento
+        lavorativo e la formazione professionale.
+      </p>
+      <div class="cards">
+        @for (policy of activePolicies; track policy.title) {
+          <article class="policy-card" appFadeInOnScroll>
+            <h3>{{ policy.title }}</h3>
+            <p>{{ policy.text }}</p>
+            <a [routerLink]="policy.path" class="policy-card__link">Scopri di più →</a>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="finanza-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="finanza-heading">Finanza agevolata</h2>
+      <p class="section__lead">
+        Ti aiutiamo a individuare ed accedere a bandi, incentivi e contributi pubblici per
+        finanziare la crescita della tua azienda e dei tuoi progetti.
+      </p>
+      <a routerLink="/finanza-agevolata" class="btn btn--primary">Scopri la finanza agevolata</a>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Pronto a fare il prossimo passo?</h2>
+      <p>
+        Che tu sia un'azienda in cerca di talenti o un candidato alla ricerca di nuove opportunità,
+        siamo qui per supportarti nel tuo percorso professionale.
+      </p>
+      <div class="cta__actions">
+        @for (action of ctaActions; track action.label) {
+          <a
+            [routerLink]="action.path"
+            class="btn"
+            [class.btn--primary]="action.primary"
+            [class.btn--ghost-light]="!action.primary"
+          >
+            {{ action.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+</main>

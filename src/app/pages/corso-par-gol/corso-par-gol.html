@@ -1,0 +1,131 @@
+@if (course(); as c) {
+  <main class="corso-par-gol">
+    <section class="hero">
+      <div class="hero__inner">
+        <p class="hero__eyebrow">Corso PAR GOL</p>
+        <h1 class="hero__title">{{ c.title }}</h1>
+        <p class="hero__subtitle">Corso gratuito finanziato dal Programma PAR GOL</p>
+      </div>
+    </section>
+
+    <section class="section section--intro" aria-labelledby="dettagli-heading">
+      <div class="section__inner" appFadeInOnScroll>
+        <h2 id="dettagli-heading">Dettagli del corso</h2>
+        <dl class="course-facts">
+          <div class="course-facts__item">
+            <dt>Settore Economico Professionale</dt>
+            <dd>{{ c.sep }}</dd>
+          </div>
+          <div class="course-facts__item">
+            <dt>Livello EQF</dt>
+            <dd>{{ c.eqf }}</dd>
+          </div>
+          <div class="course-facts__item">
+            <dt>Grado minimo d'istruzione</dt>
+            <dd>{{ c.education }}</dd>
+          </div>
+          <div class="course-facts__item">
+            <dt>Durata</dt>
+            <dd>{{ c.duration }}</dd>
+          </div>
+          <div class="course-facts__item">
+            <dt>Modalità</dt>
+            <dd>{{ c.modality }}</dd>
+          </div>
+          <div class="course-facts__item">
+            <dt>Costo</dt>
+            <dd>{{ c.cost }}</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section section--alt" aria-labelledby="descrizione-heading">
+      <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+        <h2 id="descrizione-heading">Descrizione della figura professionale</h2>
+        <p class="section__lead">{{ c.description }}</p>
+      </div>
+    </section>
+
+    @if (c.schedaUrl || c.partner) {
+      <section class="section section--alt" aria-labelledby="extra-heading">
+        <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+          <h2 id="extra-heading">Dettagli aggiuntivi</h2>
+          <div class="extra-actions">
+            @if (c.schedaUrl) {
+              <a [href]="c.schedaUrl" target="_blank" rel="noopener" class="btn btn--outline">
+                Scheda dettagliata
+              </a>
+            }
+            @if (c.partner) {
+              <button
+                type="button"
+                class="btn btn--outline"
+                [attr.aria-expanded]="showPartner()"
+                (click)="togglePartner()"
+              >
+                Partner
+              </button>
+            }
+          </div>
+
+          @if (c.partner; as p) {
+            @if (showPartner()) {
+              <dl class="partner-card" appFadeInOnScroll>
+                <div class="partner-card__item">
+                  <dt>Ragione sociale</dt>
+                  <dd>{{ p.name }}</dd>
+                </div>
+                <div class="partner-card__item">
+                  <dt>Partita IVA</dt>
+                  <dd>{{ p.piva }}</dd>
+                </div>
+                <div class="partner-card__item">
+                  <dt>Sede operativa</dt>
+                  <dd>{{ p.sede }}</dd>
+                </div>
+                <div class="partner-card__item">
+                  <dt>Codice ATECO</dt>
+                  <dd>{{ p.ateco }}</dd>
+                </div>
+                <div class="partner-card__item">
+                  <dt>U.L.A.</dt>
+                  <dd>{{ p.ula }}</dd>
+                </div>
+                <div class="partner-card__item">
+                  <dt>Accordo di collaborazione stipulato in data</dt>
+                  <dd>{{ p.agreementDate }}</dd>
+                </div>
+              </dl>
+            }
+          }
+        </div>
+      </section>
+    }
+
+    <section class="cta" aria-labelledby="cta-heading">
+      <div class="cta__inner" appFadeInOnScroll>
+        <h2 id="cta-heading">Vuoi iscriverti a questo corso?</h2>
+        <p>Contattaci per scoprire come partecipare e verificare i requisiti di accesso.</p>
+        <div class="cta__actions">
+          <a routerLink="/contatti" class="btn btn--primary">Richiedi informazioni</a>
+          <a routerLink="/par-gol" class="btn btn--ghost">Torna ai corsi PAR GOL</a>
+        </div>
+      </div>
+    </section>
+  </main>
+} @else {
+  <main class="corso-par-gol">
+    <section class="section section--intro" aria-labelledby="not-found-heading">
+      <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+        <h1 id="not-found-heading">Corso non trovato</h1>
+        <p class="section__lead">
+          Il corso che stai cercando non è disponibile. Scopri tutti i corsi PAR GOL attivi.
+        </p>
+        <div class="cta__actions">
+          <a routerLink="/par-gol" class="btn btn--primary">Vai ai corsi PAR GOL</a>
+        </div>
+      </div>
+    </section>
+  </main>
+}

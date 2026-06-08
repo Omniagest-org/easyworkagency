@@ -1,0 +1,58 @@
+<main class="contratto-apprendistato">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Contratto di apprendistato</h1>
+      <p class="hero__subtitle">Forma, inserisci e valorizza giovani talenti nella tua azienda.</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Un vero rapporto di lavoro che forma il futuro della tua azienda</h2>
+      <p class="section__lead">
+        L'apprendistato rappresenta un vero rapporto di lavoro che integra formazione e pratica
+        professionale, con vantaggi sia per l'azienda che per i nuovi assunti. Tramite contratto a
+        tempo determinato o indeterminato, è possibile fornire ai giovani le competenze necessarie
+        per ottenere una qualifica professionale riconosciuta.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="offerta-heading">
+    <div class="section__inner">
+      <h2 id="offerta-heading" appFadeInOnScroll>Cosa offre il contratto di apprendistato</h2>
+      <div class="cards">
+        @for (highlight of highlights; track highlight.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ highlight.title }}</h3>
+            <p>{{ highlight.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="servizi-heading">
+    <div class="section__inner">
+      <h2 id="servizi-heading" appFadeInOnScroll>I nostri servizi per attivare l'apprendistato</h2>
+      <div class="cards">
+        @for (service of services; track service.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Investi nei talenti di domani</h2>
+      <p>Parla con noi per attivare un percorso di apprendistato su misura per la tua azienda.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,290 @@
+openapi: 3.0.3
+info:
+  title: Easy Work - Autocandidature (import esterno)
+  description: >
+    Endpoint pubblico per l'importazione di autocandidature inviate da un sito
+    esterno autorizzato. La richiesta crea una nuova anagrafica e un nuovo
+    candidato (stato_selezione = 1, "Candidatura") nel gestionale, salvando
+    eventuali allegati (es. CV) sia su disco sia nel database. Non essendoci un
+    operatore autenticato, il candidato e la relativa voce di storico vengono
+    associati all'utente "admin" e nel campo `note` viene anteposta la dicitura
+    "Autocandidatura dal sito easyworkagency.com".
+
+    Sicurezza: l'endpoint NON richiede autenticazione utente, ma è protetto da:
+      * **CORS** - solo l'origine configurata in `AUTOCANDIDATURE_ALLOWED_ORIGIN`
+        può effettuare richieste cross-origin dal browser;
+      * **Token anti-CSRF** - un segreto condiviso (`AUTOCANDIDATURE_API_TOKEN`)
+        che il sito esterno deve inviare nell'header `X-Csrf-Token` (o, in
+        alternativa, nel campo form `csrf_token`).
+    Entrambi i controlli devono avere esito positivo affinché la richiesta
+    venga elaborata.
+  version: "1.0.0"
+servers:
+  - url: https://gestionale.example.com/ajax
+    description: Ambiente di produzione (sostituire con l'host effettivo)
+
+paths:
+  /autocandidature_submit.php:
+    options:
+      summary: Preflight CORS
+      description: >
+        Risposta alla richiesta preflight inviata automaticamente dal browser
+        prima di una POST cross-origin. Se l'header `Origin` corrisponde
+        all'origine autorizzata, la risposta include gli header CORS
+        necessari a sbloccare la successiva POST.
+      tags: [Autocandidature]
+      parameters:
+        - $ref: '#/components/parameters/OriginHeader'
+      responses:
+        '204':
+          description: Preflight accettata (header CORS presenti se l'origine è autorizzata)
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+            Access-Control-Allow-Methods:
+              $ref: '#/components/headers/AccessControlAllowMethods'
+            Access-Control-Allow-Headers:
+              $ref: '#/components/headers/AccessControlAllowHeaders'
+
+    post:
+      summary: Importa una nuova autocandidatura
+      description: >
+        Crea un nuovo candidato (con relativa anagrafica) a partire dai dati
+        inviati da un sito esterno autorizzato, ed eventualmente carica gli
+        allegati (es. CV) collegandoli al candidato appena creato.
+      operationId: submitAutocandidatura
+      tags: [Autocandidature]
+      security:
+        - csrfToken: []
+      parameters:
+        - $ref: '#/components/parameters/OriginHeader'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AutocandidaturaInput'
+            encoding:
+              allegati:
+                contentType: application/pdf, image/png, image/jpeg, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AutocandidaturaInputNoFiles'
+      responses:
+        '201':
+          description: Autocandidatura importata correttamente
+          headers:
+            Access-Control-Allow-Origin:
+              $ref: '#/components/headers/AccessControlAllowOrigin'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutocandidaturaSuccess'
+              example:
+                success: true
+                candidato_id: 4231
+                uploaded_allegati: 1
+                skipped_allegati: 0
+        '403':
+          description: >
+            Richiesta rifiutata: origine non presente nell'allowlist CORS
+            oppure token anti-CSRF mancante/non valido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                originNonAutorizzata:
+                  value: { success: false, error: "Origine non autorizzata" }
+                tokenNonValido:
+                  value: { success: false, error: "Token CSRF mancante o non valido" }
+        '405':
+          description: Metodo HTTP diverso da POST/OPTIONS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                error: "Metodo non consentito"
+        '409':
+          description: Esiste già un candidato con lo stesso codice fiscale
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                error: "Esiste già un candidato con questo codice fiscale"
+        '422':
+          description: Dati obbligatori mancanti o non validi (nome, cognome, email)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                campiObbligatori:
+                  value: { success: false, error: "Nome e cognome sono obbligatori" }
+                emailNonValida:
+                  value: { success: false, error: "Indirizzo email obbligatorio e valido" }
+        '500':
+          description: Errore interno del server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                error: "Errore interno server"
+
+components:
+  securitySchemes:
+    csrfToken:
+      type: apiKey
+      in: header
+      name: X-Csrf-Token
+      description: >
+        Segreto condiviso tra il gestionale e il sito esterno autorizzato,
+        configurato lato server tramite la variabile d'ambiente
+        `AUTOCANDIDATURE_API_TOKEN`. In alternativa al header può essere
+        inviato come campo form `csrf_token`.
+
+  parameters:
+    OriginHeader:
+      name: Origin
+      in: header
+      required: true
+      description: >
+        Origine della richiesta (impostata automaticamente dal browser nelle
+        chiamate cross-origin). Deve corrispondere esattamente al valore
+        configurato in `AUTOCANDIDATURE_ALLOWED_ORIGIN`.
+      schema:
+        type: string
+        format: uri
+        example: https://www.sito-esterno-esempio.it
+
+  headers:
+    AccessControlAllowOrigin:
+      description: Origine autorizzata, riflessa solo se corrisponde all'allowlist
+      schema:
+        type: string
+        example: https://www.sito-esterno-esempio.it
+    AccessControlAllowMethods:
+      description: Metodi HTTP consentiti in CORS
+      schema:
+        type: string
+        example: "POST, OPTIONS"
+    AccessControlAllowHeaders:
+      description: Header custom ammessi in CORS
+      schema:
+        type: string
+        example: "Content-Type, X-Csrf-Token"
+
+  schemas:
+    AutocandidaturaInputNoFiles:
+      type: object
+      required: [nome, cognome, email]
+      properties:
+        csrf_token:
+          type: string
+          description: >
+            Token anti-CSRF, alternativo all'header `X-Csrf-Token` (usato ad
+            esempio quando non è possibile impostare header custom).
+          example: "5f4dcc3b5aa765d61d8327deb882cf99…"
+        nome:
+          type: string
+          maxLength: 50
+          example: Mario
+        cognome:
+          type: string
+          maxLength: 50
+          example: Rossi
+        email:
+          type: string
+          format: email
+          example: mario.rossi@example.com
+        telefono:
+          type: string
+          maxLength: 50
+          example: "+39 333 1234567"
+        data_nascita:
+          type: string
+          format: date
+          example: "1995-04-12"
+        luogo_nascita:
+          type: string
+          maxLength: 100
+          example: Milano
+        sesso:
+          type: string
+          enum: [M, F, Altro, ""]
+          example: M
+        domicilio:
+          type: string
+          example: "Via Roma 1, 20100 Milano (MI)"
+        codice_fiscale:
+          type: string
+          maxLength: 16
+          example: RSSMRA95D12F205X
+        titolo_studio:
+          type: string
+          maxLength: 255
+          example: "Laurea in Informatica"
+        profilo_professionale:
+          type: string
+          maxLength: 255
+          example: "Sviluppatore Backend"
+        esperienze_lavorative:
+          type: string
+          example: "3 anni come sviluppatore presso Acme S.r.l."
+        note:
+          type: string
+          description: >
+            Note libere del candidato. Nel record salvato viene anteposta
+            automaticamente la dicitura "Autocandidatura dal sito
+            easyworkagency.com".
+          example: "Disponibile da subito, full-time"
+
+    AutocandidaturaInput:
+      allOf:
+        - $ref: '#/components/schemas/AutocandidaturaInputNoFiles'
+        - type: object
+          properties:
+            allegati:
+              type: array
+              description: Allegati da collegare al candidato (es. CV, lettera di presentazione)
+              items:
+                type: string
+                format: binary
+
+    AutocandidaturaSuccess:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        candidato_id:
+          type: integer
+          example: 4231
+        uploaded_allegati:
+          type: integer
+          description: Numero di allegati caricati e collegati con successo
+          example: 1
+        skipped_allegati:
+          type: integer
+          description: Numero di allegati ignorati (errore di upload, file vuoto, ecc.)
+          example: 0
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "Messaggio di errore descrittivo"
+
+tags:
+  - name: Autocandidature
+    description: Importazione di autocandidature da siti esterni autorizzati

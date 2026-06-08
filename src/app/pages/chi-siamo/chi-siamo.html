@@ -1,0 +1,57 @@
+<main class="chi-siamo">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Chi Siamo</h1>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="about-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="about-heading">Più opportunità senza stress</h2>
+      <p class="section__lead">
+        Easy Work è un'agenzia per il lavoro accreditata dalla Regione Campania. Ci dedichiamo
+        quotidianamente a facilitare l'incontro tra domanda e offerta di lavoro attraverso attività
+        di intermediazione polifunzionale.
+      </p>
+      <p class="section__lead">
+        Il nostro impegno va oltre la semplice ricerca di impiego: lavoriamo per creare opportunità
+        concrete per i cittadini, capaci di generare valore per le imprese, i professionisti e la
+        società nel suo insieme.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="valori-heading">
+    <div class="section__inner">
+      <h2 id="valori-heading" appFadeInOnScroll>I nostri valori</h2>
+      <p class="section__lead" appFadeInOnScroll>
+        Garantiamo continuità professionale e supportiamo la crescita di chi opera in un mercato del
+        lavoro in continua evoluzione, investendo in competenze digitali e in soluzioni sostenibili.
+      </p>
+      <div class="cards">
+        @for (value of values; track value.title) {
+          <article class="value-card" appFadeInOnScroll>
+            <h3>{{ value.title }}</h3>
+            <p>{{ value.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Vuoi saperne di più su Easy Work?</h2>
+      <p>
+        Contattaci per scoprire come possiamo supportare la tua azienda o accompagnarti nella
+        ricerca della tua prossima opportunità professionale.
+      </p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Contattaci</a>
+        <a routerLink="/cerca-offerte-di-lavoro" class="btn btn--ghost-light"
+          >Cerca offerte di lavoro</a
+        >
+      </div>
+    </div>
+  </section>
+</main>

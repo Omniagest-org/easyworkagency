@@ -1,0 +1,56 @@
+<main class="progettazione-bandi">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Progettazione e Bandi</h1>
+      <p class="hero__subtitle">Trasforma le opportunità in risultati concreti.</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Accesso ai finanziamenti pubblici, senza pensieri</h2>
+      <p class="section__lead">
+        Supportiamo la tua azienda nell'accesso ai finanziamenti pubblici, con strategie mirate e
+        una gestione completa delle candidature per bandi regionali, nazionali e internazionali.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="servizi-heading">
+    <div class="section__inner">
+      <h2 id="servizi-heading" appFadeInOnScroll>Cosa facciamo per te</h2>
+      <div class="cards">
+        @for (service of services; track service.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="motivi-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="motivi-heading">Perché attivare questo servizio?</h2>
+      <ul class="check-list">
+        @for (reason of reasons; track reason) {
+          <li>{{ reason }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Individua il bando giusto per la tua azienda</h2>
+      <p>
+        Presenta la candidatura corretta e accedi a nuove opportunità di crescita con il supporto
+        dei nostri esperti.
+      </p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

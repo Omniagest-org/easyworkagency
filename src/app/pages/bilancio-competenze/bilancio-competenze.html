@@ -1,0 +1,57 @@
+<main class="bilancio-competenze">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Bilancio delle Competenze</h1>
+      <p class="hero__subtitle">Vuoi dare una svolta alla tua carriera?</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">In cosa consiste il servizio</h2>
+      <p class="section__lead">
+        Il bilancio di competenze è il servizio ideale per valorizzare il tuo talento e aprirti
+        nuove opportunità professionali. Consiste in un'analisi strutturata e approfondita che
+        permette di valutare le competenze acquisite nel corso della vita lavorativa o formativa
+        (formazione, esperienze lavorative, soft skills), per costruire un percorso su misura per
+        la tua crescita. Attraverso strumenti innovativi e strategie mirate, avrai accesso a un
+        percorso pensato appositamente per te.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="come-funziona-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="come-funziona-heading">Come funziona</h2>
+      <ul class="check-list">
+        @for (item of howItWorks; track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="a-cosa-serve-heading">
+    <div class="section__inner">
+      <h2 id="a-cosa-serve-heading" appFadeInOnScroll>A cosa serve</h2>
+      <div class="cards">
+        @for (purpose of purposes; track purpose.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ purpose.title }}</h3>
+            <p>{{ purpose.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Scopri il tuo potenziale nascosto</h2>
+      <p>Orientati meglio nel mondo del lavoro: richiedi una consulenza con i nostri esperti.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

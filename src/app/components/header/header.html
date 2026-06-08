@@ -1,0 +1,81 @@
+<header class="site-header">
+  <div class="site-header__bar">
+    <a
+      routerLink="/"
+      class="site-header__brand"
+      (click)="closeMenu()"
+      aria-label="Easy Work – Agenzia per il lavoro, torna alla home"
+    >
+      <img
+        src="logo_orizzontale.png"
+        alt="Easy Work – Agenzia per il lavoro"
+        width="300"
+        height="150"
+        class="site-header__logo"
+      />
+    </a>
+
+    <nav
+      id="primary-navigation"
+      class="site-nav"
+      [class.is-open]="menuOpen()"
+      aria-label="Navigazione principale"
+    >
+      <ul class="site-nav__list">
+        @for (link of navLinks; track link.label) {
+          <li class="site-nav__item" [class.has-dropdown]="link.children">
+            @if (link.children) {
+              <button
+                type="button"
+                class="site-nav__link"
+                (click)="toggleDropdown(link.label)"
+                [attr.aria-expanded]="openDropdown() === link.label"
+              >
+                {{ link.label }}
+              </button>
+              @if (openDropdown() === link.label) {
+                <ul class="site-nav__dropdown">
+                  @for (child of link.children; track child.label) {
+                    <li class="site-nav__dropdown-item">
+                      <a
+                        [routerLink]="child.path"
+                        class="site-nav__dropdown-link"
+                        (click)="closeMenu()"
+                      >
+                        {{ child.label }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              }
+            } @else {
+              <a
+                [routerLink]="link.path"
+                routerLinkActive="is-active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="site-nav__link"
+                (click)="closeMenu()"
+              >
+                {{ link.label }}
+              </a>
+            }
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <button
+      type="button"
+      class="site-header__toggle"
+      [class.is-open]="menuOpen()"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="primary-navigation"
+      aria-label="Apri il menu di navigazione"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

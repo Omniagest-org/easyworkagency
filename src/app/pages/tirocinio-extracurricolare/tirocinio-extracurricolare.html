@@ -1,0 +1,84 @@
+<main class="tirocinio-extracurricolare">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Tirocinio extracurriculare: un trampolino per la tua carriera</h1>
+      <p class="hero__subtitle">
+        Un'opportunità concreta per avviare o rilanciare il tuo percorso professionale,
+        sperimentando sul campo le competenze acquisite e costruendo nuove abilità direttamente in
+        azienda.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Un percorso formativo nel mondo del lavoro</h2>
+      <p class="section__lead">
+        Si tratta di un percorso formativo progettato per offrirti un'esperienza pratica in
+        un'azienda, permettendoti di acquisire competenze professionali mirate e costruire un
+        bagaglio di conoscenze utile per il tuo futuro.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="vantaggi-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="vantaggi-heading">Cosa puoi ottenere da un tirocinio extracurriculare</h2>
+      <p class="section__lead">
+        Non è un contratto di lavoro, ma una vera esperienza formativa. Un'occasione strategica per
+        crescere, imparare, inserirsi nel mondo del lavoro.
+      </p>
+      <ul class="check-list">
+        @for (benefit of benefits; track benefit) {
+          <li>{{ benefit }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tipologie-heading">
+    <div class="section__inner">
+      <h2 id="tipologie-heading" appFadeInOnScroll>Tipologie di tirocini disponibili</h2>
+      <p class="section__lead section__lead--centered" appFadeInOnScroll>
+        Ogni percorso è pensato per valorizzare il tuo profilo e rispondere a diverse fasi della
+        carriera.
+      </p>
+      <div class="cards">
+        @for (type of internshipTypes; track type.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ type.title }}</h3>
+            <p>{{ type.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="attiva-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="attiva-heading">Come attivare il tuo tirocinio</h2>
+      <p class="section__lead">
+        Il processo è semplice e guidato. Le aziende accolgono i tirocinanti selezionati in base
+        alle esigenze. Noi ti accompagniamo passo passo come ente promotore.
+      </p>
+      <ol class="step-list">
+        @for (step of activationSteps; track step) {
+          <li>{{ step }}</li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Il tuo futuro professionale parte da qui</h2>
+      <p>
+        Scopri come costruire un'esperienza formativa efficace e su misura: siamo al tuo fianco
+        per ogni fase del percorso.
+      </p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

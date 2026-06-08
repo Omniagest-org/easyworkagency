@@ -1,0 +1,63 @@
+<main class="par-gol">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">PAR GOL: il tuo percorso verso il lavoro</h1>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Un programma per il reinserimento nel mondo del lavoro</h2>
+      <p class="section__lead">
+        La misura PAR GOL (Programma di Politiche Attive per il Lavoro – Garanzia di Occupabilità
+        dei Lavoratori) è un'iniziativa pensata per supportare chi è in cerca di occupazione,
+        offrendo percorsi personalizzati per il reinserimento nel mondo del lavoro. Il programma
+        mette a disposizione diverse opportunità per migliorare le tue competenze e aumentare le
+        possibilità di trovare un impiego, tra cui:
+      </p>
+      <ul class="check-list">
+        @for (opportunity of opportunities; track opportunity) {
+          <li>{{ opportunity }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="partecipa-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="partecipa-heading">Chi può partecipare</h2>
+      <p class="section__lead">
+        Il programma si rivolge a persone in cerca di occupazione o in condizione di vulnerabilità
+        economica o sociale:
+      </p>
+      <ul class="check-list">
+        @for (participant of participants; track participant) {
+          <li>{{ participant }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="corsi-heading">
+    <div class="section__inner">
+      <h2 id="corsi-heading" appFadeInOnScroll>Corsi PAR GOL disponibili</h2>
+      <ul class="course-grid">
+        @for (course of courses; track course.slug) {
+          <li appFadeInOnScroll>
+            <a class="course-tag" [routerLink]="['/corso-par-gol', course.slug]">{{ course.title }}</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Inizia il tuo percorso verso il lavoro</h2>
+      <p>Scopri se rientri tra i beneficiari del PAR GOL e quale percorso fa per te.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

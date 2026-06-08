@@ -1,0 +1,39 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__col site-footer__col--brand">
+      <img
+        src="logo_orizzontale.png"
+        alt="Easy Work – Agenzia per il lavoro"
+        width="150"
+        height="56"
+        loading="lazy"
+        class="site-footer__logo"
+      />
+      <h2 class="site-footer__heading">Le nostre sedi</h2>
+      <ul class="site-footer__list">
+        @for (office of offices; track office) {
+          <li>{{ office }}</li>
+        }
+      </ul>
+    </div>
+
+    @for (column of linkColumns; track column.title) {
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">{{ column.title }}</h2>
+        <ul class="site-footer__list site-footer__list--links">
+          @for (link of column.links; track link.path) {
+            <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+
+  <div class="site-footer__bottom">
+    <p>&copy; {{ year }} Easy Work Srl | P.IVA: 09380001215 | All Right Reserved.</p>
+    <ul class="site-footer__legal">
+      <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+      <li><a routerLink="/cookie-policy">Cookie Policy</a></li>
+    </ul>
+  </div>
+</footer>

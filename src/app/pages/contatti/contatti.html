@@ -1,0 +1,170 @@
+<main class="contatti">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Contatti</h1>
+      <p class="hero__subtitle">
+        Siamo a tua disposizione: scrivici, chiamaci o vieni a trovarci in una delle nostre sedi.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="recapiti-heading">
+    <div class="section__inner">
+      <h2 id="recapiti-heading" appFadeInOnScroll>I nostri recapiti</h2>
+      <div class="contact-grid">
+        <article class="contact-card" appFadeInOnScroll>
+          <span class="contact-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z" />
+            </svg>
+          </span>
+          <h3>Telefono</h3>
+          <ul class="plain-list plain-list--icons">
+            @for (phone of phones; track phone.number) {
+              <li>
+                <span class="plain-list__icon" aria-hidden="true">
+                  @if (phone.type === 'cellulare') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="6" y="2" width="12" height="20" rx="2" />
+                      <line x1="11" y1="18" x2="13" y2="18" />
+                    </svg>
+                  } @else {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="3" width="16" height="18" rx="2" />
+                      <path d="M8 7h8M8 11h8M8 15h4" />
+                    </svg>
+                  }
+                </span>
+                <a [href]="'tel:' + phone.number.replace(' ', '')">
+                  {{ phone.number }}
+                  <span class="plain-list__tag">{{ phone.type === 'cellulare' ? 'cellulare' : 'fisso' }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </article>
+        <article class="contact-card" appFadeInOnScroll>
+          <span class="contact-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 6-10 7L2 6" />
+            </svg>
+          </span>
+          <h3>Email generale</h3>
+          <ul class="plain-list">
+            <li><a href="mailto:easyworksrl@pec.it">easyworksrl@pec.it</a></li>
+            <li><a href="mailto:info@easyworkagency.com">info@easyworkagency.com</a></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="sedi-heading">
+    <div class="section__inner">
+      <h2 id="sedi-heading" appFadeInOnScroll>Le nostre sedi</h2>
+      <div class="cards">
+        @for (office of offices; track office.name) {
+          <article class="office-card" appFadeInOnScroll>
+            <span class="office-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </span>
+            <h3>{{ office.name }}</h3>
+            <p>{{ office.address }}</p>
+            <ul class="plain-list">
+              @for (email of office.emails; track email) {
+                <li><a [href]="'mailto:' + email">{{ email }}</a></li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+      <div class="locations-map-wrapper" appFadeInOnScroll>
+        <app-locations-map [locations]="mapLocations" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="form-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="form-heading">Scrivici</h2>
+      <p class="section__lead">
+        Compila il modulo con i tuoi dati e il motivo della richiesta: ti risponderemo il prima
+        possibile. I campi contrassegnati con <span class="required-mark">*</span> sono
+        obbligatori.
+      </p>
+
+      @if (submitted()) {
+        <p class="form-success" role="status">
+          Grazie per averci scritto! Abbiamo ricevuto il tuo messaggio e ti risponderemo al più
+          presto.
+        </p>
+      } @else {
+        @if (error()) {
+          <p class="form-error" role="alert">
+            Non siamo riusciti a inviare il messaggio. Riprova tra qualche minuto oppure scrivici
+            direttamente a <a href="mailto:info@easyworkagency.com">info&#64;easyworkagency.com</a>.
+          </p>
+        }
+        <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Nome <span class="required-mark">*</span></span>
+              <input type="text" name="nome" [(ngModel)]="form.nome" #nome="ngModel" required autocomplete="given-name" />
+              @if (nome.invalid && nome.touched) {
+                <small class="contact-form__hint">Inserisci il tuo nome.</small>
+              }
+            </label>
+            <label class="contact-form__field">
+              <span>Cognome <span class="required-mark">*</span></span>
+              <input type="text" name="cognome" [(ngModel)]="form.cognome" #cognome="ngModel" required autocomplete="family-name" />
+              @if (cognome.invalid && cognome.touched) {
+                <small class="contact-form__hint">Inserisci il tuo cognome.</small>
+              }
+            </label>
+          </div>
+          <div class="contact-form__row">
+            <label class="contact-form__field">
+              <span>Email <span class="required-mark">*</span></span>
+              <input type="email" name="email" [(ngModel)]="form.email" #email="ngModel" required email autocomplete="email" />
+              @if (email.invalid && email.touched) {
+                <small class="contact-form__hint">Inserisci un indirizzo email valido.</small>
+              }
+            </label>
+            <label class="contact-form__field">
+              <span>Telefono</span>
+              <input type="tel" name="telefono" [(ngModel)]="form.telefono" autocomplete="tel" />
+            </label>
+          </div>
+          <label class="contact-form__field">
+            <span>Oggetto <span class="required-mark">*</span></span>
+            <input type="text" name="oggetto" [(ngModel)]="form.oggetto" #oggetto="ngModel" required />
+            @if (oggetto.invalid && oggetto.touched) {
+              <small class="contact-form__hint">Indica l'oggetto della richiesta.</small>
+            }
+          </label>
+          <label class="contact-form__field">
+            <span>Messaggio <span class="required-mark">*</span></span>
+            <textarea name="messaggio" rows="5" [(ngModel)]="form.messaggio" #messaggio="ngModel" required></textarea>
+            @if (messaggio.invalid && messaggio.touched) {
+              <small class="contact-form__hint">Scrivi il tuo messaggio.</small>
+            }
+          </label>
+          <label class="contact-form__checkbox">
+            <input type="checkbox" name="privacy" [(ngModel)]="form.privacy" #privacy="ngModel" required />
+            <span>Ho letto e accetto l'informativa sulla privacy. <span class="required-mark">*</span></span>
+          </label>
+          @if (privacy.invalid && privacy.touched) {
+            <small class="contact-form__hint">Devi accettare l'informativa privacy per inviare il messaggio.</small>
+          }
+          <button type="submit" class="btn btn--primary" [disabled]="contactForm.invalid || sending()">
+            {{ sending() ? 'Invio in corso…' : 'Invia il messaggio' }}
+          </button>
+        </form>
+      }
+    </div>
+  </section>
+</main>

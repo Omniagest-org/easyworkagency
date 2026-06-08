@@ -1,0 +1,51 @@
+<main class="servizio-orientamento-professionale">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Servizio di Orientamento Professionale</h1>
+      <p class="hero__subtitle">
+        Scopri il percorso giusto per te. Ti aiutiamo a comprendere capacità, esperienze e
+        aspirazioni per costruire il tuo futuro professionale su basi solide.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Un percorso su misura per il tuo futuro professionale</h2>
+      <p class="section__lead">
+        Il servizio di orientamento professionale è pensato per guidarti e sostenerti in un
+        percorso di crescita personale e professionale, per conoscere meglio le tue capacità,
+        esperienze e aspirazioni, così da prendere decisioni più informate sul tuo percorso
+        lavorativo ideale.
+      </p>
+      <p class="section__lead">
+        Questo servizio offre supporto nella scelta del percorso formativo o lavorativo più adatto
+        alle proprie competenze e interessi.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="offerta-heading">
+    <div class="section__inner">
+      <h2 id="offerta-heading" appFadeInOnScroll>Cosa offre il servizio</h2>
+      <div class="cards">
+        @for (offering of offerings; track offering.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ offering.title }}</h3>
+            <p>{{ offering.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Costruisci il tuo futuro professionale</h2>
+      <p>Prenota un incontro con i nostri esperti per ricevere un supporto personalizzato.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

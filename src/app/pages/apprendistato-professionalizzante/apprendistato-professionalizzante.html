@@ -1,0 +1,54 @@
+<main class="apprendistato-professionalizzante">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Apprendistato Professionalizzante</h1>
+      <p class="hero__subtitle">Apprendistato Professionalizzante: impara lavorando.</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Lavoro e formazione si uniscono in un percorso qualificante</h2>
+      <p class="section__lead">
+        Se cerchi un'esperienza pratica per formarti direttamente sul campo, il contratto di
+        apprendistato è la tua occasione. Lavoro e formazione si uniscono in un percorso
+        qualificante e strutturato per garantirti una crescita reale.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="opportunita-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="opportunita-heading">Un'opportunità concreta per te e per le imprese</h2>
+      <p class="section__lead">
+        Grazie agli incentivi, le aziende investono volentieri nella formazione degli apprendisti.
+        Questo rende il contratto una vera occasione di inserimento lavorativo con prospettive di
+        crescita.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="offerta-heading">
+    <div class="section__inner">
+      <h2 id="offerta-heading" appFadeInOnScroll>Cosa offriamo con l'apprendistato</h2>
+      <div class="cards">
+        @for (offering of offerings; track offering.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ offering.title }}</h3>
+            <p>{{ offering.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Hai dubbi o vuoi sapere se puoi accedere?</h2>
+      <p>Parla con noi: ti aiutiamo a capire come iniziare il tuo percorso di apprendistato.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>

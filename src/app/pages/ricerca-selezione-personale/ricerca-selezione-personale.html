@@ -1,0 +1,55 @@
+<main class="ricerca-selezione-personale">
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">Ricerca e Selezione del Personale</h1>
+      <p class="hero__subtitle">Trova il talento giusto per far crescere la tua azienda.</p>
+    </div>
+  </section>
+
+  <section class="section section--intro" aria-labelledby="intro-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="intro-heading">Recruiting su misura per le tue esigenze aziendali</h2>
+      <p class="section__lead">
+        In un mercato sempre più competitivo, i nostri recruiter ottimizzano ogni fase del
+        processo selettivo con criteri di matching mirato per individuare risorse qualificate e
+        allineate ai tuoi obiettivi aziendali.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="servizi-heading">
+    <div class="section__inner">
+      <h2 id="servizi-heading" appFadeInOnScroll>Cosa facciamo per te</h2>
+      <div class="cards">
+        @for (service of services; track service.title) {
+          <article class="offering-card" appFadeInOnScroll>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="motivi-heading">
+    <div class="section__inner section__inner--narrow" appFadeInOnScroll>
+      <h2 id="motivi-heading">Perché scegliere noi</h2>
+      <p class="section__lead">Una squadra formata è una squadra più:</p>
+      <ul class="check-list">
+        @for (reason of reasons; track reason) {
+          <li>{{ reason }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="cta__inner" appFadeInOnScroll>
+      <h2 id="cta-heading">Costruisci team efficaci e duraturi</h2>
+      <p>Affidati a professionisti della selezione per trovare le persone giuste per la tua azienda.</p>
+      <div class="cta__actions">
+        <a routerLink="/contatti" class="btn btn--primary">Richiedi una consulenza</a>
+      </div>
+    </div>
+  </section>
+</main>
