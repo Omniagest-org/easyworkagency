@@ -49,11 +49,18 @@ export class Contatti {
     { number: '082 31841458', type: 'fisso' },
   ];
 
-  protected readonly offices: (MapLocation & { emails: string[] })[] = [
+  protected readonly offices: (MapLocation & {
+    emails: string[];
+    phones?: { number: string; type: 'cellulare' | 'fisso' }[];
+  })[] = [
     {
       name: 'Marcianise (CE)',
       address: 'Via SS 335 - Centro Derù snc - 81025 Marcianise (CE)',
       emails: ['infocaserta@easyworkagency.com', 'selezioni@easyworkagency.com'],
+      phones: [
+        { number: '351 3066021', type: 'cellulare' },
+        { number: '082 31841458', type: 'fisso' },
+      ],
       lat: 41.0055,
       lng: 14.2905,
     },
@@ -62,6 +69,7 @@ export class Contatti {
       address:
         'Viale della Costituzione (c/o il Centro Direzionale di Napoli), Isola A/3, scala B, piano I, interno 107 - Napoli (NA)',
       emails: ['infonapoli@easyworkagency.com', 'selezioninapoli@easyworkagency.com'],
+      phones: [{ number: '351 310 3479', type: 'cellulare' }],
       lat: 40.8559,
       lng: 14.2786,
     },
@@ -69,6 +77,7 @@ export class Contatti {
       name: 'Salerno (SA)',
       address: 'Via Irno 11, 84135 Salerno (SA)',
       emails: ['infosalerno@easyworkagency.com', 'selezionisalerno@easyworkagency.com'],
+      phones: [{ number: '351 508 6329', type: 'cellulare' }],
       lat: 40.6815,
       lng: 14.7748,
     },

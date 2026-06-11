@@ -74,7 +74,25 @@
             </span>
             <h3>{{ office.name }}</h3>
             <p>{{ office.address }}</p>
-            <ul class="plain-list">
+            <ul class="plain-list plain-list--icons">
+              @for (phone of office.phones; track phone.number) {
+                <li>
+                  <span class="plain-list__icon" aria-hidden="true">
+                    @if (phone.type === 'cellulare') {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="2" width="12" height="20" rx="2" />
+                        <line x1="11" y1="18" x2="13" y2="18" />
+                      </svg>
+                    } @else {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="3" width="16" height="18" rx="2" />
+                        <path d="M8 7h8M8 11h8M8 15h4" />
+                      </svg>
+                    }
+                  </span>
+                  <a [href]="'tel:' + phone.number.replace(' ', '')">{{ phone.number }}</a>
+                </li>
+              }
               @for (email of office.emails; track email) {
                 <li><a [href]="'mailto:' + email">{{ email }}</a></li>
               }

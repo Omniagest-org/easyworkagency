@@ -38,19 +38,6 @@
     </div>
   </section>
 
-  <section class="section" aria-labelledby="corsi-heading">
-    <div class="section__inner">
-      <h2 id="corsi-heading" appFadeInOnScroll>Corsi PAR GOL disponibili</h2>
-      <ul class="course-grid">
-        @for (course of courses; track course.slug) {
-          <li appFadeInOnScroll>
-            <a class="course-tag" [routerLink]="['/corso-par-gol', course.slug]">{{ course.title }}</a>
-          </li>
-        }
-      </ul>
-    </div>
-  </section>
-
   <section class="cta" aria-labelledby="cta-heading">
     <div class="cta__inner" appFadeInOnScroll>
       <h2 id="cta-heading">Inizia il tuo percorso verso il lavoro</h2>

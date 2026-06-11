@@ -21,7 +21,6 @@ export class Footer {
       title: 'Per i cittadini',
       links: [
         { label: 'Invia la tua autocandidatura', path: '/manda-il-tuo-cv' },
-        { label: 'Crea il tuo CV', path: '/manda-il-tuo-cv' },
         { label: 'Bilancio delle competenze', path: '/bilancio-delle-competenze' },
       ],
     },

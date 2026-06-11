@@ -19,10 +19,6 @@ export class Header {
       label: 'Servizi per le aziende',
       children: [
         { label: 'Formazione dipendenti', path: '/formazione-dipendenti' },
-        {
-          label: 'Corsi per la sicurezza sul lavoro',
-          path: '/corsi-per-la-sicurezza-sul-lavoro',
-        },
         { label: 'Contratto di apprendistato', path: '/contratto-di-apprendistato' },
         {
           label: 'Ricerca e Selezione del Personale',
@@ -56,7 +52,6 @@ export class Header {
         },
       ],
     },
-    { label: 'Finanza agevolata', path: '/finanza-agevolata' },
     { label: 'Par GOL', path: '/par-gol' },
     { label: 'Contatti', path: '/contatti' },
   ];

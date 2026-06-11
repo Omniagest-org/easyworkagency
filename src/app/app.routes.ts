@@ -3,7 +3,6 @@ import { Home } from './pages/home/home';
 import { ChiSiamo } from './pages/chi-siamo/chi-siamo';
 import { Contatti } from './pages/contatti/contatti';
 import { FormazioneDipendenti } from './pages/formazione-dipendenti/formazione-dipendenti';
-import { CorsiSicurezzaLavoro } from './pages/corsi-sicurezza-lavoro/corsi-sicurezza-lavoro';
 import { ContrattoApprendistato } from './pages/contratto-apprendistato/contratto-apprendistato';
 import { RicercaSelezionePersonale } from './pages/ricerca-selezione-personale/ricerca-selezione-personale';
 import { ProgettazioneBandi } from './pages/progettazione-bandi/progettazione-bandi';
@@ -12,9 +11,7 @@ import { ServizioOrientamentoProfessionale } from './pages/servizio-orientamento
 import { BilancioCompetenze } from './pages/bilancio-competenze/bilancio-competenze';
 import { TirocinioExtracurricolare } from './pages/tirocinio-extracurricolare/tirocinio-extracurricolare';
 import { ApprendistatoProfessionalizzante } from './pages/apprendistato-professionalizzante/apprendistato-professionalizzante';
-import { FinanzaAgevolata } from './pages/finanza-agevolata/finanza-agevolata';
 import { ParGol } from './pages/par-gol/par-gol';
-import { CorsoParGol } from './pages/corso-par-gol/corso-par-gol';
 import { PrivacyPolicy } from './pages/privacy-policy/privacy-policy';
 import { CookiePolicy } from './pages/cookie-policy/cookie-policy';
 import { CreaIlTuoCv } from './pages/crea-il-tuo-cv/crea-il-tuo-cv';
@@ -27,11 +24,6 @@ export const routes: Routes = [
     path: 'formazione-dipendenti',
     component: FormazioneDipendenti,
     title: 'Formazione Dipendenti – Easy Work',
-  },
-  {
-    path: 'corsi-per-la-sicurezza-sul-lavoro',
-    component: CorsiSicurezzaLavoro,
-    title: 'Corsi per la sicurezza sul lavoro – Easy Work',
   },
   {
     path: 'contratto-di-apprendistato',
@@ -74,19 +66,9 @@ export const routes: Routes = [
     title: 'Apprendistato Professionalizzante – Easy Work',
   },
   {
-    path: 'finanza-agevolata',
-    component: FinanzaAgevolata,
-    title: 'Finanza Agevolata – Easy Work',
-  },
-  {
     path: 'par-gol',
     component: ParGol,
     title: 'PAR GOL – Easy Work',
-  },
-  {
-    path: 'corso-par-gol/:slug',
-    component: CorsoParGol,
-    title: 'Corso PAR GOL – Easy Work',
   },
   {
     path: 'privacy-policy',

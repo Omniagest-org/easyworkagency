@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { FadeInOnScrollDirective } from '../../shared/directives/fade-in-on-scroll.directive';
-import { PAR_GOL_COURSES } from '../corso-par-gol/corso-par-gol.data';
 import { SeoService } from '../../shared/services/seo';
 
 @Component({
@@ -31,11 +30,6 @@ export class ParGol {
     'Lavoratori fragili o vulnerabili',
     'Lavoratori con redditi molto bassi (working poor)',
   ];
-
-  protected readonly courses = PAR_GOL_COURSES.map((course) => ({
-    title: course.title,
-    slug: course.slug,
-  }));
 
   constructor() {
     const pageTitle = 'PAR GOL – Easy Work';
