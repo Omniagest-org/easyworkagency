@@ -46,7 +46,7 @@ export class Contatti {
 
   protected readonly phones: { number: string; type: 'cellulare' | 'fisso' }[] = [
     { number: '351 3066021', type: 'cellulare' },
-    { number: '082 31841458', type: 'fisso' },
+    { number: '081 31841458', type: 'fisso' },
   ];
 
   protected readonly offices: (MapLocation & {
@@ -59,7 +59,7 @@ export class Contatti {
       emails: ['infocaserta@easyworkagency.com', 'selezioni@easyworkagency.com'],
       phones: [
         { number: '351 3066021', type: 'cellulare' },
-        { number: '082 31841458', type: 'fisso' },
+        { number: '081 31841458', type: 'fisso' },
       ],
       lat: 41.0055,
       lng: 14.2905,
@@ -83,12 +83,14 @@ export class Contatti {
     },
   ];
 
-  protected readonly mapLocations: MapLocation[] = this.offices.map(({ name, address, lat, lng }) => ({
-    name,
-    address,
-    lat,
-    lng,
-  }));
+  protected readonly mapLocations: MapLocation[] = this.offices.map(
+    ({ name, address, lat, lng }) => ({
+      name,
+      address,
+      lat,
+      lng,
+    }),
+  );
 
   protected onSubmit(): void {
     if (!this.form.privacy || this.sending()) {
@@ -117,7 +119,7 @@ export class Contatti {
   constructor() {
     const pageTitle = 'Contatti – Easy Work';
     const description =
-      "Contatta Easy Work: scopri le sedi di Marcianise, Napoli e Salerno, i recapiti telefonici ed email, oppure scrivici tramite il modulo di contatto.";
+      'Contatta Easy Work: scopri le sedi di Marcianise, Napoli e Salerno, i recapiti telefonici ed email, oppure scrivici tramite il modulo di contatto.';
 
     this.title.setTitle(pageTitle);
     this.meta.updateTag({ name: 'description', content: description });
